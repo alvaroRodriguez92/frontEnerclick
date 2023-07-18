@@ -31,11 +31,20 @@ import Configuracion from "../Configuracion/Configuracion";
 const drawerWidth = 240;
 
 export default function MiniDrawer() {
+
+  //Theme que lleva como prop el drawer
   const theme = useTheme();
+
+  //Definimos open para abrir y cerrar el menu
   const [open, setOpen] = useState(false);
+
+  //Definimos menu para las opciones de nuestra drawer donde se veran las distintas gráficas
   const [menu, setMenu] = useState("Grafica de barras");
+
+  //Traemos el logout de nuestro authContext
   const { logout } = useAuthContext();
 
+  //Funcion que abre y cierra el drawer
   function handleDrawer() {
     setOpen((currentState) => !currentState);
   }

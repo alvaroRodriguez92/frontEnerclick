@@ -4,21 +4,21 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext({
   login: () => {},
   logout: () => {},
-  user: null,
   users: null,
   errorMessage: null,
 });
 
 export default function AuthContextProvider({ children }) {
+  //Inicializamos navigate para poder darle uso al sistema de navegacion de react-router-dom
   const navigate = useNavigate();
+
+  //Definimos usuarios
   const [users, setUsers] = useState([]);
 
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+  //Definimos mensaje de error para el formulario de login
   const [errorMessage, setErrorMessage] = useState("");
 
+  //Nos traemos todos los usuarios por si hiciese falta
   useEffect(() => {
     async function getUsers() {
       const response = await fetch("https://fakestoreapi.com/users");
@@ -28,8 +28,9 @@ export default function AuthContextProvider({ children }) {
     getUsers();
   }, []);
 
+  //Definimos nuestra funcion de login que devolverá un token que almacenaremos en el localStorage, y nos redireccionará al 
+  //apartado de configuracion
   async function login(values, e) {
-    console.log(values);
     e.preventDefault();
     const response = await fetch("https://fakestoreapi.com/auth/login", {
       method: "POST",
@@ -39,24 +40,23 @@ export default function AuthContextProvider({ children }) {
         password: values.password,
       }),
     });
-    if(response.status==200){
+    if (response.status == 200) {
       const data = await response.json();
-      console.log(data)
-      localStorage.setItem("token",JSON.stringify(data));
-      navigate("/configuracion")
-    } else{
-      setErrorMessage("Los datos introducidos son incorrectos")
+      localStorage.setItem("token", JSON.stringify(data));
+      navigate("/configuracion");
+    } else {
+      setErrorMessage("Los datos introducidos son incorrectos");
     }
   }
 
+  //Logout que eliminará el token del local storage y nos devolverá a la pagina de inicio
   function logout() {
-    setUser({ email: "", password: "" });
     localStorage.removeItem("token");
     navigate("/");
   }
 
+  //Definimos los values que usaremos de nuestro context
   const value = {
-    user,
     users,
     login,
     logout,

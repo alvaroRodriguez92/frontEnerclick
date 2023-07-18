@@ -11,13 +11,18 @@ const ChartContext = createContext({
 });
 
 export default function ChartContextProvider({ children }) {
-  const [chartData, setChartData] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
+
+  //Navigate para la función de redireccion de react-router-dom
   const navigate = useNavigate();
+
+  //Creamos chartdata para almacenar los datos que vienen de la api de energia
+  const [chartData, setChartData] = useState([]);
+  
+  //Definimos loading para crear un spinner
   const [loading, setLoading] = useState(false);
 
 
-
+  //Llamamamos a la api de energia
    async function fetchApi (e, lang,category,widget, dateStart,dateEnd,time) {
     e.preventDefault()
     if(!lang||!category||!widget||!dateStart||!dateEnd||!time){
@@ -40,6 +45,8 @@ export default function ChartContextProvider({ children }) {
     }
   
 }
+
+  //Definimos los values que usaremos de nuestro context
   const value = {
     chartData,
     fetchApi,
