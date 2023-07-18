@@ -72,7 +72,7 @@ export default function Configuracion() {
     <Box sx={{ margin: "0 auto", p: "5%", width: "50%" }}>
         <form onSubmit={(e)=>fetchApi(e,lang,category,widget,dateStart,dateEnd,time)}>
       <Grid container sx={{ display: "flex", flexDirection: "row" }}>
-        <Grid sx={{p:1}} item xs={4}>
+        <Grid sx={{p:1}} item  md={4} xs={12}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Idioma</InputLabel>
             <Select
@@ -93,7 +93,7 @@ export default function Configuracion() {
           </FormControl>
         </Grid>
 
-        <Grid sx={{p:1}} item xs={4}>
+        <Grid sx={{p:1}} item md={4} xs={12}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
             <Select
@@ -114,7 +114,7 @@ export default function Configuracion() {
           </FormControl>
         </Grid>
 
-        <Grid sx={{p:1}} item xs={4}>
+        <Grid sx={{p:1}} item md={4} xs={12}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Widget</InputLabel>
             <Select
@@ -138,17 +138,17 @@ export default function Configuracion() {
             </Select>
           </FormControl>
         </Grid>
-          <Grid sx={{p:1}} item xs={4}>
+          <Grid sx={{p:1}} item md={4} xs={12}>
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
             <DatePicker sx={{width:"100%"}} label="Fecha inicio" onChange={handleChangeDateStart} />{" "}
           </LocalizationProvider>
         </Grid>
-        <Grid sx={{p:1}} item xs={4}>
+        <Grid sx={{p:1}} item md={4} xs={12}>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
             <DatePicker sx={{width:"100%"}} label="Fecha final" onChange={handleChangeDateEnd} />{" "}
           </LocalizationProvider>
         </Grid>
-        <Grid sx={{p:1}} item xs={4}>
+        <Grid sx={{p:1}} item md={4} xs={12}>
         <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Tiempo</InputLabel>
             <Select
@@ -168,7 +168,7 @@ export default function Configuracion() {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item sx={{p:1}} xs={2}>
+        <Grid item sx={{p:1}} md={4} xs={12}>
         <Button variant="contained" type="submit">Enviar</Button>
         </Grid>
         </Grid>

@@ -170,12 +170,12 @@ export default function BarChart() {
   return (
     <>
     <Grid sx={{width:"100%"}} container>
-        <Grid item xs={10}>
-    <Box sx={{ mt: "5%", ml: "2%", width: "60%" }}>
-      <Grid container sx={{ ml: "35%", mb: 2 }}>
+        <Grid item xs={9} md={10} xl={8}>
+    <Box sx={{ mt: "5%", width: "100%" }}>
+      <Grid container sx={{  ml:"25%", mb: 2 }}>
         {chartData.included.map((item, index) => {
           return (
-            <Grid key={index} item xs={3} sx={{ p: 1 }}>
+            <Grid key={index} item xs={2} md={2} xl={2} sx={{ p: 1 }}>
               <Button
                 fullWidth
                 size="small"
@@ -191,7 +191,7 @@ export default function BarChart() {
       {labels1?(<Bar options={options} data={data1}/>):(<Bar options={options} data={data2}/>)}
     </Box>
     </Grid>
-    <Grid item xs={2} sx={{mt:10}}>
+    <Grid item xs={5}md={4} xl={2} sx={{mt:10, ml:10}}>
         <ConfiguracionChart/>
     </Grid>
     </Grid>

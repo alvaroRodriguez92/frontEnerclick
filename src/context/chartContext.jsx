@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const ChartContext = createContext({
   fetchApi: () => {},
   chartData:null,
-  errorMessage: null,
   loading:null,
 });
 
@@ -50,7 +49,6 @@ export default function ChartContextProvider({ children }) {
   const value = {
     chartData,
     fetchApi,
-    errorMessage,
     loading
   };
 
