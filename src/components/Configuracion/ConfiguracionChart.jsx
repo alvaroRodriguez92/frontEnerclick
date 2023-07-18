@@ -1,67 +1,72 @@
 import {
-    TextField,
-    Box,
-    Button,
-    FormControl,
-    Grid,
-    MenuItem,
-    Select,
-    InputLabel,
-  } from "@mui/material";
-  import { useState, useEffect } from "react";
-  import { params } from "./params";
-  import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-  import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-  import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-  import { useChartContext } from "../../context/chartContext";
-  import ClipLoader from "react-spinners/ClipLoader";
+  TextField,
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  MenuItem,
+  Select,
+  InputLabel,
+} from "@mui/material";
+import { useState, useEffect } from "react";
+import { params } from "./params";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { useChartContext } from "../../context/chartContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
-  
-  import "dayjs/locale/es";
-  import dayjs from "dayjs";
-  
-  export default function Configuracion() {
-    const [lang, setLang] = useState("");
-    const [category, setCategory] = useState("");
-    const [widget, setWidget] = useState("");
-    const [dateStart, setDateStart] = useState("");
-    const [dateEnd, setDateEnd] = useState("");
-    const [time, setTime] = useState("");
-    const{fetchApi,chartData, loading} = useChartContext()
-  
-    const handleChangeLang = (event) => {
-      setLang(event.target.value);
-    };
-  
-    const handleChangeCategory = (event) => {
-      setCategory(event.target.value);
-    };
-  
-    const handleChangeWidget = (event) => {
-      setWidget(event.target.value);
-    };
-  
-    const handleChangeDateStart = (event) => {
-      const fechaInicial = dayjs(event).format("YYYY-MM-DDTHH:MM");
-      setDateStart(fechaInicial);
-    };
-  
-    const handleChangeDateEnd = (event) => {
-      const fechaFinal = dayjs(event).format("YYYY-MM-DDTHH:MM");
-      setDateEnd(fechaFinal);
-    };
-  
-    const handleChangeTime = (event) => {
-      setTime(event.target.value);
-    };
-  
-    console.log(chartData)
-  
-    return (
-      <Box sx={{ margin: "0 auto", p: "2%", width: "95%" }}>
-          <form onSubmit={(e)=>fetchApi(e,lang,category,widget,dateStart,dateEnd,time)}>
+import "dayjs/locale/es";
+import dayjs from "dayjs";
+
+export default function Configuracion() {
+  //Este componente es igual que el de configuracion pero adaptado para la vista que contiene el chart
+
+  //Definimos un estado para cada uno de los campos del formulario
+  const [lang, setLang] = useState("");
+  const [category, setCategory] = useState("");
+  const [widget, setWidget] = useState("");
+  const [dateStart, setDateStart] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
+  const [time, setTime] = useState("");
+  const { fetchApi, chartData, loading } = useChartContext();
+
+  //Definimos una funcion handle change para cada uno de los campos del formulario
+  const handleChangeLang = (event) => {
+    setLang(event.target.value);
+  };
+
+  const handleChangeCategory = (event) => {
+    setCategory(event.target.value);
+  };
+
+  const handleChangeWidget = (event) => {
+    setWidget(event.target.value);
+  };
+
+  const handleChangeDateStart = (event) => {
+    const fechaInicial = dayjs(event).format("YYYY-MM-DDTHH:MM");
+    setDateStart(fechaInicial);
+  };
+
+  const handleChangeDateEnd = (event) => {
+    const fechaFinal = dayjs(event).format("YYYY-MM-DDTHH:MM");
+    setDateEnd(fechaFinal);
+  };
+
+  const handleChangeTime = (event) => {
+    setTime(event.target.value);
+  };
+
+  return (
+    <Box sx={{ margin: "0 auto", p: "2%", width: "95%" }}>
+      <form
+        onSubmit={(e) =>
+          fetchApi(e, lang, category, widget, dateStart, dateEnd, time)
+        }
+      >
         <Grid container sx={{ display: "flex", flexDirection: "column" }}>
-          <Grid sx={{p:1}} item xs={12}>
+          <Grid sx={{ p: 1 }} item xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Idioma</InputLabel>
               <Select
@@ -81,8 +86,8 @@ import {
               </Select>
             </FormControl>
           </Grid>
-  
-          <Grid sx={{p:1}} item xs={12}>
+
+          <Grid sx={{ p: 1 }} item xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
               <Select
@@ -102,8 +107,8 @@ import {
               </Select>
             </FormControl>
           </Grid>
-  
-          <Grid sx={{p:1}} item xs={12}>
+
+          <Grid sx={{ p: 1 }} item xs={12}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Widget</InputLabel>
               <Select
@@ -127,18 +132,21 @@ import {
               </Select>
             </FormControl>
           </Grid>
-            <Grid sx={{p:1}} item xs={12}>
+          <Grid sx={{ p: 1 }} item xs={12}>
             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
-              <DatePicker label="Fecha inicio" onChange={handleChangeDateStart} />{" "}
+              <DatePicker
+                label="Fecha inicio"
+                onChange={handleChangeDateStart}
+              />{" "}
             </LocalizationProvider>
           </Grid>
-          <Grid sx={{p:1}} item xs={12}>
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
+          <Grid sx={{ p: 1 }} item xs={12}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
               <DatePicker label="Fecha final" onChange={handleChangeDateEnd} />{" "}
             </LocalizationProvider>
           </Grid>
-          <Grid sx={{p:1}} item xs={12}>
-          <FormControl fullWidth>
+          <Grid sx={{ p: 1 }} item xs={12}>
+            <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Tiempo</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -157,20 +165,21 @@ import {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item sx={{p:1}} xs={12}>
-          <Button sx={{mr:5}}variant="contained" type="submit">Enviar</Button>
-          <ClipLoader
-        color="rgb(233, 83, 30)"
-        loading={loading}
-        // cssOverride={override}
-        size={30}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+          <Grid item sx={{ p: 1 }} xs={12}>
+            <Button sx={{ mr: 5 }} variant="contained" type="submit">
+              Enviar
+            </Button>
+            <ClipLoader
+              color="rgb(233, 83, 30)"
+              loading={loading}
+              // cssOverride={override}
+              size={30}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
           </Grid>
-          </Grid>
-          </form>
-      </Box>
-    );
-  }
-  
+        </Grid>
+      </form>
+    </Box>
+  );
+}

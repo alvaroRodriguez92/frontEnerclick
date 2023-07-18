@@ -33,7 +33,6 @@ export default function ChartContextProvider({ children }) {
   if(response.status==200){
       const data = await response.json()
       setChartData(data)
-      console.log(chartData)
       navigate("/home")
       setLoading(false)
 

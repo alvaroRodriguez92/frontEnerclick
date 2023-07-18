@@ -138,7 +138,6 @@ export default function BarChart() {
             "group":chartData?.included[chartIndex]?.groupId
         })
     })
-  console.log(chartData);
 
   //AQUI DEFINIMOS DATA1 Y DATA2, PARA LOS DOS TIPOS DE ESTRUCTURA DE DATOS QUE PUEDEN RECIBIR LAS GRÁFICAS
   const data1 = {
