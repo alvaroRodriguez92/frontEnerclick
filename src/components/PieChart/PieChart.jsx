@@ -10,23 +10,23 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 export default function BarChart() {
-    //EXTENDEMOS DAYJS PARA PODER DARLE FORMATO A LAS FECHAS
-    dayjs.extend(localizedFormat);
+  //Extendemos DAYJS para poder darle formato a las fechas
+  dayjs.extend(localizedFormat);
 
-    //TRAEMOS CHARTDATA DEL CONTEXT
-    const { chartData } = useChartContext();
-    //CHART INDEX LO USAREMOS PARA NAVEGAR POR LOS DISTINTOS INDICES DE CHARTDATA
-    const [chartIndex, setChartIndex] = useState(0);
+  //Traemos chartData del context
+  const { chartData } = useChartContext();
+  //ChartIndex lo usaremos para navegar por los distintos indices de chartData
+  const [chartIndex, setChartIndex] = useState(0);
   
-    //NOS ASEGURAEMOS DE QUE LA PÁGINA NO DEVUELVA NADA EN CASO DE QUE NO LE LLEGUE CHARTDATA
+  //Nos aseguramos de que la página no devuelva nada en caso de que no llegue chartData
   if (!chartData) {
     return null;
   }
 
-    //REGISTRAMOS LOS ELEMENTOS QUE USA NUESTRO CHART
+  //Registramos los elementos que usa nuestro chart
   Chart.register(ArcElement, Tooltip, Legend);
 
-  //DEFINIMOS LABELS, VALUES Y LOS ELEMENTOS DEL DATAGRID PARA LA ESTRUCTURA DE DATOS QUE TIENE "CONTENT"
+  //Definimos labels, values y los elementos del datagrid para la estructura de datos que tiene el array "content"
   const labels1 = chartData?.included[chartIndex]?.attributes.content?.map(
     (item, index) => {
       return item.type;
@@ -83,7 +83,7 @@ export default function BarChart() {
     }
   );
 
-  //DEFINIMOS LABELS, VALUES Y LOS ELEMENTOS DEL DATAGRID PARA LA SEGUNDA ESTRUCTURA DE DATOS QUE TIENE EL ARRAY "VALUES"
+  //Definimos labels, values y los elementos del datagrid para la segunda estructura de datos que tiene el array "values"
 
   const labels2 = chartData?.included[chartIndex]?.attributes.values?.map(
     (item, index) => {
@@ -132,7 +132,7 @@ export default function BarChart() {
     }
   );
 
-  //AQUI DEFINIMOS DATA1 Y DATA2, PARA LOS DOS TIPOS DE ESTRUCTURA DE DATOS QUE PUEDEN RECIBIR LAS GRÁFICAS
+  //Aqui definimos data1 y data2 para los dos tipos de estructura de datos que pueden recibir las gráficas
   const data1 = {
     labels: labels1,
     datasets: [
