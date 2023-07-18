@@ -10,22 +10,29 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 export default function BarChart() {
-  dayjs.extend(localizedFormat);
-  const { chartData } = useChartContext();
-  const [chartIndex, setChartIndex] = useState(0);
+    //EXTENDEMOS DAYJS PARA PODER DARLE FORMATO A LAS FECHAS
+    dayjs.extend(localizedFormat);
 
+    //TRAEMOS CHARTDATA DEL CONTEXT
+    const { chartData } = useChartContext();
+    //CHART INDEX LO USAREMOS PARA NAVEGAR POR LOS DISTINTOS INDICES DE CHARTDATA
+    const [chartIndex, setChartIndex] = useState(0);
+  
+    //NOS ASEGURAEMOS DE QUE LA PÁGINA NO DEVUELVA NADA EN CASO DE QUE NO LE LLEGUE CHARTDATA
   if (!chartData) {
     return null;
   }
 
+    //REGISTRAMOS LOS ELEMENTOS QUE USA NUESTRO CHART
   Chart.register(ArcElement, Tooltip, Legend);
 
-  //DEFINIMOS LABELS Y VALUES PARA LA ESTRUCTURA DE DATOS QUE TIENE "CONTENT"
+  //DEFINIMOS LABELS, VALUES Y LOS ELEMENTOS DEL DATAGRID PARA LA ESTRUCTURA DE DATOS QUE TIENE "CONTENT"
   const labels1 = chartData?.included[chartIndex]?.attributes.content?.map(
     (item, index) => {
       return item.type;
     }
   );
+  //Definimos SumaValues para realizar el sumatorio de la variable percentages que hay en dataChart
   let sumaValues = 0;
 
   const arrayValues = chartData?.included[chartIndex]?.attributes.content?.map(
@@ -76,7 +83,7 @@ export default function BarChart() {
     }
   );
 
-  //DEFINIMOS LABELS Y VALUES PARA LA ESTRUCTURA DE DATOS QUE TIENE "VALUES"
+  //DEFINIMOS LABELS, VALUES Y LOS ELEMENTOS DEL DATAGRID PARA LA SEGUNDA ESTRUCTURA DE DATOS QUE TIENE EL ARRAY "VALUES"
 
   const labels2 = chartData?.included[chartIndex]?.attributes.values?.map(
     (item, index) => {
@@ -125,8 +132,7 @@ export default function BarChart() {
     }
   );
 
-  console.log(chartData);
-
+  //AQUI DEFINIMOS DATA1 Y DATA2, PARA LOS DOS TIPOS DE ESTRUCTURA DE DATOS QUE PUEDEN RECIBIR LAS GRÁFICAS
   const data1 = {
     labels: labels1,
     datasets: [
