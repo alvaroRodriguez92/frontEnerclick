@@ -18,11 +18,15 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useChartContext } from "../../context/chartContext";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useAuthContext } from "../../context/authContext";
 
 import "dayjs/locale/es";
 import dayjs from "dayjs";
 
 export default function Configuracion() {
+
+  const { logout } = useAuthContext();
+
   //Definimos un estado para cada uno de los campos del formulario
   const [lang, setLang] = useState("");
   const [category, setCategory] = useState("");
@@ -66,6 +70,9 @@ export default function Configuracion() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Álvaro Rodriguez
           </Typography>
+          <Button onClick={logout} variant="outlined" color="inherit">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Box sx={{ margin: "0 auto", p: "5%", width: "50%" }}>

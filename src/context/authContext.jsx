@@ -6,6 +6,7 @@ const AuthContext = createContext({
   logout: () => {},
   users: null,
   errorMessage: null,
+  isLogged: null,
 });
 
 export default function AuthContextProvider({ children }) {
@@ -14,6 +15,12 @@ export default function AuthContextProvider({ children }) {
 
   //Definimos usuarios
   const [users, setUsers] = useState([]);
+
+  //Defino una variable para permitir la navegacion a rutas privadas
+  const [activarNavigate, setActivarNavigate] = useState(null);
+
+  //Definimos variable para saber si un usuario se encuentra logueado o no
+  const [isLogged, setIsLogged] = useState(false)
 
   //Definimos mensaje de error para el formulario de login
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,6 +39,7 @@ export default function AuthContextProvider({ children }) {
   //apartado de configuracion
   async function login(values, e) {
     e.preventDefault();
+    console.log(isLogged)
     const response = await fetch("https://fakestoreapi.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -43,8 +51,11 @@ export default function AuthContextProvider({ children }) {
     if (response.status == 200) {
       const data = await response.json();
       localStorage.setItem("token", JSON.stringify(data));
-      navigate("/configuracion");
+      setActivarNavigate(true)
+      const token = localStorage.getItem("token");
+      navigate("/configuracion")
     } else {
+      
       setErrorMessage("Los datos introducidos son incorrectos");
     }
   }
@@ -52,6 +63,7 @@ export default function AuthContextProvider({ children }) {
   //Logout que eliminará el token del local storage y nos devolverá a la pagina de inicio
   function logout() {
     localStorage.removeItem("token");
+    console.log(isLogged)
     navigate("/");
   }
 
@@ -61,6 +73,7 @@ export default function AuthContextProvider({ children }) {
     login,
     logout,
     errorMessage,
+    isLogged
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
