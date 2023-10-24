@@ -12,3 +12,16 @@ Bienvenido a mi prueba técnica de Enerclick! Para inicializar el proyecto siga 
 
 Gracias por usar esta mini aplicacion!
     
+///////////////////////////////////////////////////////////////////
+
+Welcome to my Enerclick technical test! To initialize the project follow the following steps:
+
+1. Run the `npm install` command at the root of the project to install the dependencies
+
+2. Run the `npm run dev` command to start the project
+
+3. For login you can use the following user and password:
+  - user:'johnd'
+  - password:'m38rmF$'
+
+Thank you for using this mini application!
